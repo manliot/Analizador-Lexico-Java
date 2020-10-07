@@ -2,7 +2,7 @@
 %{
    #include <stdio.h>
    int yylinea;
-   int err=0;
+   int err;
    #define IF          1;
    #define ELSE        2; 
    #define FOR         3;
@@ -47,14 +47,14 @@
    #define OP_Y       42;
    #define OP_O       43;
    #define OP_NO      44;
-   #define CHAR       45;
 %}
 digito [0-9]
 letra [a-zA-Z]
 
 %%
+
 "if"      return IF;
-"else"    return ELSE;
+"else"    return ELSE
 "for"     return FOR;
 "while"   return WHILE;
 "double"  return DOUBLE;
@@ -64,16 +64,15 @@ letra [a-zA-Z]
 "public"  return PUBLIC;
 "class"   return CLASS;
 "static"  return STATIC;
-"void"    return VOID;
-"char"    return CHAR;
+"void"    return VOID
 "*"       return OP_MULT;
-"+"       return OP_SUM;
+"+"       return OP_SUM
 "-"       return OP_SUST;
-"/"       return OP_DIV;
+"/"       return OP_DIV
 "="       return OP_ASIG;
-"%"       return OP_MOD;
+"%"       return OP_MOD
 "++"      return PLUSPLUS;
-"--"      return MENMEN;
+"--"      return MENMEN
 "+="      return MASIGUA;
 "-="      return MENOSIGUA;
 "*="      return PORIGUA;
@@ -104,19 +103,15 @@ letra [a-zA-Z]
 [ ]   ;
 .     err++;
 %%
-char *const nombres[]={NULL,"IF","ELSE","FOR","WHILE","DOUBLE","INT","STRING","NEW","PUBLIC","CLASS","STATIC","VOID","Op-mult","Op-sum","Op-sust","Op-div","Op-asing","Op-mod","Op-masMas","Op-menosMenos","Op-sumAsig","Op-menAsig","Op-mulAsig","Op-divAsig","Llave-a","Llave-c", "Punto-coma","Parent-a","Parent-c","Corchete-a","Corchete-c","Cte-entera","Cte-real","Cte-cadena","Id","Igual","Op-Men-igual","Op-May-igual","Op-Diferente","Op-Mayor","Op-Menor","Op-y","Op-o","Op-no","CHAR"};
-int yywrap(){
-	return 1;
-}
 int main(){
    int token;
    token = yylex();
    while(token){
-           printf("Line: %d\tToken Type: %s \tLexema: %s \n" , yylinea, nombres[token], yytext);
+           printf("Line: %d\tToken Type: %d \tLexema: %s \n" , yylinea, token, yytext);
            token = yylex();
+
    }
    printf("ERROR TOKENS: %d ...\n", err);
    return 0;
-   
-  
 }
+x
