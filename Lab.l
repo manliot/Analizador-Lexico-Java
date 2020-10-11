@@ -1,8 +1,12 @@
 
 %{
    #include <stdio.h>
+   #include <stdlib.h>
+   #include <string.h>
+   #include <stdbool.h>
    int yylinea;
    int err=0;
+   FILE* fichero;    
    #define IF          1;
    #define ELSE        2; 
    #define FOR         3;
@@ -48,10 +52,10 @@
    #define OP_O       43;
    #define OP_NO      44;
    #define CHAR       45;
+   #define COMENTARIO 46;
 %}
 digito [0-9]
 letra [a-zA-Z]
-
 %%
 "if"      return IF;
 "else"    return ELSE;
@@ -61,8 +65,8 @@ letra [a-zA-Z]
 "int"     return INT;
 "String"  return STRING;
 "new"     return NEW;
-"public"  return PUBLIC;
-"class"   return CLASS;
+"public"  return PUBLIC;            
+"class"   return CLASS;          
 "static"  return STATIC;
 "void"    return VOID;
 "char"    return CHAR;
@@ -85,10 +89,11 @@ letra [a-zA-Z]
 ")"		 return PARENT_C;
 "["		 return CORCHET_A;
 "]"		 return CORCHET_C;
-"-"?({digito})+                       return CTE_ENT
+"-"?({digito})+                                        return CTE_ENT
 "-"?({digito})+"."({digito})+(e([-|+])[1-9]+)?         return CTE_REAL
-("\"")([^\n\"]*([.])*)*("\"")                 return CTE_CAD
+("\"")([^\n\"]*([.])*)*("\"")                          return CTE_CAD
 ({letra}|"_")({letra}|{digito}|"_")*  return ID
+"//"([^\n\"]*([.])*)*                                  return COMENTARIO
 "=="		 return OP_IGUAL;
 "<="		 return OP_MENIGUA;
 ">="		 return OP_MAYIGUA;
@@ -100,23 +105,62 @@ letra [a-zA-Z]
 "||"		 return OP_O;
 "!"		 return OP_NO;
 \n    yylinea++;
-\t    ;
-[ ]   ;
-.     err++;
+\t			;
+\r			;
+[ ]			;
+.			{err++;printf("\tERROR LEXICO--> $s");}
 %%
-char *const nombres[]={NULL,"IF","ELSE","FOR","WHILE","DOUBLE","INT","STRING","NEW","PUBLIC","CLASS","STATIC","VOID","Op-mult","Op-sum","Op-sust","Op-div","Op-asing","Op-mod","Op-masMas","Op-menosMenos","Op-sumAsig","Op-menAsig","Op-mulAsig","Op-divAsig","Llave-a","Llave-c", "Punto-coma","Parent-a","Parent-c","Corchete-a","Corchete-c","Cte-entera","Cte-real","Cte-cadena","Id","Igual","Op-Men-igual","Op-May-igual","Op-Diferente","Op-Mayor","Op-Menor","Op-y","Op-o","Op-no","CHAR"};
+char *const nombres[]={NULL,"IF","ELSE","FOR","WHILE","DOUBLE","INT","STRING","NEW","PUBLIC","CLASS","STATIC","VOID",
+"Op-mult","Op-sum","Op-sust","Op-div","Op-asing","Op-mod","Op-masMas","Op-menosMenos","Op-sumAsig","Op-menAsig",
+"Op-mulAsig","Op-divAsig","Llave-a","Llave-c", "Punto-coma","Parent-a","Parent-c","Corchete-a","Corchete-c","Cte-entera",
+"Cte-real","Cte-cadena","Id","Igual","Op-Men-igual","Op-May-igual","Op-Diferente","Op-Mayor","Op-Menor","Op-y","Op-o",
+"Op-no","CHAR","Comentario"};
+
 int yywrap(){
 	return 1;
 }
 int main(){
-   int token;
-   token = yylex();
-   while(token){
-           printf("Line: %d\tToken Type: %s \tLexema: %s \n" , yylinea, nombres[token], yytext);
-           token = yylex();
-   }
+  fichero = fopen("salida.txt", "w");
+  int token, i= 0, n=0, linea=0;
+  
+  token = yylex();
+  char *ids[10000];    
+  while(token){
+    //printf("Line: %d\tToken Type: %s \tLexema: %s \n" , yylinea, nombres[token], yytext);
+    if(linea != yylinea){//guarda salto de linea cuando detecta otra linea
+      fputs("\n", fichero);
+    }
+    if((token>=1 & token<=12) || token==45){//palabras clave
+      fprintf(fichero,"%s ",nombres[token]);
+    }else{
+      fprintf(fichero,"%s= %s ",nombres[token],yytext);          
+      if( token == 35){
+        ids[i]=strdup(yytext);
+        i++;
+	     n++;             
+      }
+    }
+    linea=yylinea;     
+    token = yylex();
+
+    if (token > 45 || token == 0){
+       err++;
+       printf(" \tERROR LEXICO--> %d \n", yylinea);
+    }
+  }
+  fprintf(fichero,"\n \n \n \n TABLA DE IDENTIFICADORES \n ");
+  for (int j=0; j<n;j++){
+    fprintf(fichero,"id= %s; ",ids[j]);        
+  }
+
    printf("ERROR TOKENS: %d ...\n", err);
    return 0;
    
-  
+   fclose(fichero);
 }
+// Eliminar los id repeti2
+//considerar comentarios
+//arreglos de cualquier dim,  cadenas en asignacion
+//LISTADO DE ERRORES
+// Cualquier símbolo diferente de los establecidos es un error y se debe colocar también en el archivo de
+//salida.

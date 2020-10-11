@@ -1,0 +1,23 @@
+PUBLIC CLASS Id= AnyThing Llave-a= { 
+PUBLIC STATIC VOID Id= main Parent-a= ( STRING Corchete-a= [ Corchete-c= ] Id= args Parent-c= ) Llave-a= { 
+INT Id= i Op-asing= = Cte-entera= 1 Punto-coma= ; 
+INT Id= j Op-asing= = Cte-entera= 20 Punto-coma= ; 
+CHAR Id= c Punto-coma= ; 
+STRING Cte-entera= 3 Id= cadena Punto-coma= ; 
+DOUBLE Id= z Punto-coma= ; 
+Id= z Op-asing= = Cte-real= 14.9e-8 Punto-coma= ; 
+Id= z Op-asing= = Cte-real= 12.9 Punto-coma= ; 
+Id= cadena Op-asing= = Cte-cadena= "Hola" Punto-coma= ; 
+Id= c Op-asing= = Cte-cadena= "a" Punto-coma= ; 
+Id= i Op-asing= = Id= i Op-mult= * Cte-entera= 2 Punto-coma= ; 
+FOR Parent-a= ( INT Id= k Op-asing= = Cte-entera= 1 Punto-coma= ; Id= k Op-Menor= < Id= j Punto-coma= ; Id= k Op-masMas= ++ Parent-c= ) Llave-a= { 
+Id= i Op-mulAsig= *= Id= k Punto-coma= ; 
+Id= z Op-divAsig= /= Cte-real= 2.0 Punto-coma= ; 
+Llave-c= } 
+Llave-c= } 
+Llave-c= } 
+ 
+ 
+ 
+ TABLA DE IDENTIICADORES 
+ id= AnyThing; id= main; id= args; id= i; id= j; id= c; id= cadena; id= z; id= z; id= z; id= cadena; id= c; id= i; id= i; id= k; id= k; id= j; id= k; id= i; id= k; id= z; 
