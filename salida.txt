@@ -3,7 +3,7 @@ PUBLIC STATIC VOID Id= main Parent-a= ( STRING Corchete-a= [ Corchete-c= ] Id= a
 INT Id= i Op-asing= = Cte-entera= 1 Punto-coma= ; 
 INT Id= j Op-asing= = Cte-entera= 20 Punto-coma= ; 
 CHAR Id= c Punto-coma= ; 
-STRING Cte-entera= 3 Id= cadena Punto-coma= ; 
+STRING Id= cadena Punto-coma= ; 
 DOUBLE Id= z Punto-coma= ; 
 Id= z Op-asing= = Cte-real= 14.9e-8 Punto-coma= ; 
 Id= z Op-asing= = Cte-real= 12.9 Punto-coma= ; 
@@ -19,5 +19,6 @@ Llave-c= }
  
  
  
- TABLA DE IDENTIICADORES 
- id= AnyThing; id= main; id= args; id= i; id= j; id= c; id= cadena; id= z; id= z; id= z; id= cadena; id= c; id= i; id= i; id= k; id= k; id= j; id= k; id= i; id= k; id= z; 
+TABLA DE IDENTIFICADORES 
+Hay 9 identificadores 
+id= AnyThing; id= main; id= args; id= i; id= j; id= c; id= cadena; id= z; id= k; 

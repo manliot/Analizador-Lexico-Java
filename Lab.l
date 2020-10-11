@@ -6,7 +6,8 @@
    #include <stdbool.h>
    int yylinea;
    int err=0;
-   FILE* fichero;    
+   FILE* fichero; 
+   int buscar(char *const yytext,char *const ids[],int i);   
    #define IF          1;
    #define ELSE        2; 
    #define FOR         3;
@@ -89,11 +90,12 @@ letra [a-zA-Z]
 ")"		 return PARENT_C;
 "["		 return CORCHET_A;
 "]"		 return CORCHET_C;
-"-"?({digito})+                                        return CTE_ENT
-"-"?({digito})+"."({digito})+(e([-|+])[1-9]+)?         return CTE_REAL
-("\"")([^\n\"]*([.])*)*("\"")                          return CTE_CAD
-({letra}|"_")({letra}|{digito}|"_")*  return ID
-"//"([^\n\"]*([.])*)*                                  return COMENTARIO
+"-"?({digito})+                                         return CTE_ENT;
+"-"?({digito})+"."({digito})+(e([-|+])[1-9]+)?          return CTE_REAL;
+("\"")([^\n\"]*([.])*)*("\"")                           return CTE_CAD;
+({letra}|"_")({letra}|{digito}|"_")*                    return ID;
+"//"([^\n\"]*([.])*)*                                   return COMENTARIO;
+"\/*"([.])*"\*/"                                        return COMENTARIO;
 "=="		 return OP_IGUAL;
 "<="		 return OP_MENIGUA;
 ">="		 return OP_MAYIGUA;
@@ -121,12 +123,11 @@ int yywrap(){
 }
 int main(){
   fichero = fopen("salida.txt", "w");
-  int token, i= 0, n=0, linea=0;
+  int token, i= 0, n=0, linea=0, sw=0;
   
   token = yylex();
   char *ids[10000];    
-  while(token){
-    //printf("Line: %d\tToken Type: %s \tLexema: %s \n" , yylinea, nombres[token], yytext);
+  while(token){    
     if(linea != yylinea){//guarda salto de linea cuando detecta otra linea
       fputs("\n", fichero);
     }
@@ -135,9 +136,10 @@ int main(){
     }else{
       fprintf(fichero,"%s= %s ",nombres[token],yytext);          
       if( token == 35){
-        ids[i]=strdup(yytext);
-        i++;
-	     n++;             
+        if(buscar(yytext,ids,i)==0){         
+          ids[i]=strdup(yytext);
+          i++;          
+        }      	                  
       }
     }
     linea=yylinea;     
@@ -148,8 +150,8 @@ int main(){
        printf(" \tERROR LEXICO--> %d \n", yylinea);
     }
   }
-  fprintf(fichero,"\n \n \n \n TABLA DE IDENTIFICADORES \n ");
-  for (int j=0; j<n;j++){
+  fprintf(fichero,"\n \n \n \nTABLA DE IDENTIFICADORES \nHay %d identificadores \n",i);
+  for (int j=0; j<i;j++){
     fprintf(fichero,"id= %s; ",ids[j]);        
   }
 
@@ -158,7 +160,15 @@ int main(){
    
    fclose(fichero);
 }
-// Eliminar los id repeti2
+int buscar(char *const yytext,char *const ids[],int i){  
+  for (int k=0; k<i; k++){    
+    if (strcmp( strdup(yytext),ids[k])==0){
+      return 1;
+    }
+  }
+  return 0;
+}
+
 //considerar comentarios
 //arreglos de cualquier dim,  cadenas en asignacion
 //LISTADO DE ERRORES
