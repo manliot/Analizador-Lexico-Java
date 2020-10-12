@@ -4,7 +4,7 @@ public static void main (String[] args){
  int i=1;
  int j=20;
  char c;
- String cadena;
+ String cad&ena;
  double z;
  z=14.9e-8;
  z=12.9;

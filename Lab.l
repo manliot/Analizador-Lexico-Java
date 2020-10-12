@@ -2,8 +2,7 @@
 %{
    #include <stdio.h>
    #include <stdlib.h>
-   #include <string.h>
-  
+   #include <string.h>  
    int yylinea;
    int err=0;
    FILE* fichero; 
@@ -54,10 +53,12 @@
    #define OP_NO      44;
    #define CHAR       45;
    #define COMENTARIO 46;
-   #define ERROR      47;    
+   #define ERROR      47;
+   #define ARREGLO    48; 
 %}
 digito [0-9]
 letra [a-zA-Z]
+variable ({letra})({letra}|{digito})*  
 %%
 "if"      return IF;
 "else"    return ELSE;
@@ -91,47 +92,50 @@ letra [a-zA-Z]
 ")"		    return PARENT_C;
 "["		    return CORCHET_A;
 "]"		    return CORCHET_C;
-"-"?({digito})+                                         return CTE_ENT;
-"-"?({digito})+"."({digito})+(e([-|+])[1-9]+)?          return CTE_REAL;
-("\"")([^\n\"]*([.])*)*("\"")                           return CTE_CAD;
-({letra})({letra}|{digito})*                    return ID;
-"//"([^\n\"]*([.])*)*                                   return COMENTARIO;
-"\/*"([.])*"\*/"                                        return COMENTARIO;
+"-"?({digito})+                                                          return CTE_ENT;
+"-"?({digito})+"."({digito})+(e([-|+])[1-9]+)?                           return CTE_REAL;
+("\"")([^\n\"]*([.])*)*("\"")                                            return CTE_CAD;
+{variable}                                                               return ID;
+"//".*                                                    return COMENTARIO;
+"\/*"([^\n\"]*([.])*)*"\*/"                                              return COMENTARIO;
+{variable}"["{digito}+"]"    return ARREGLO;
 "=="		 return OP_IGUAL;
 "<="		 return OP_MENIGUA;
 ">="		 return OP_MAYIGUA;
 "<>"		 return DIFERENTE;
-">"		 return MAYOR;
-"<"		 return MENOR;
+">"		   return MAYOR;
+"<"		   return MENOR;
 "!="		 return DIFERENTE;
 "&&"		 return OP_Y;
 "||"		 return OP_O;
-"!"		 return OP_NO;
-\n    yylinea++;
+"!"		   return OP_NO;
+\n       yylinea++;
 \t			;
 \r			;
 [ ]			;
-.			{err++;return ERROR}
+({digito})({letra}|{digito})*   return ERROR;
+({letra})({letra}|{digito}|"&")*   return ERROR;
+ . {err++;return ERROR}
 %%
 char *const nombres[]={"ERROR","IF","ELSE","FOR","WHILE","DOUBLE","INT","STRING","NEW","PUBLIC","CLASS","STATIC","VOID",
 "Op-mult","Op-sum","Op-sust","Op-div","Op-asing","Op-mod","Op-masMas","Op-menosMenos","Op-sumAsig","Op-menAsig",
 "Op-mulAsig","Op-divAsig","Llave-a","Llave-c", "Punto-coma","Parent-a","Parent-c","Corchete-a","Corchete-c","Cte-entera",
 "Cte-real","Cte-cadena","Id","Igual","Op-Men-igual","Op-May-igual","Op-Diferente","Op-Mayor","Op-Menor","Op-y","Op-o",
-"Op-no","CHAR","Comentario"};
+"Op-no","CHAR","Comentario","Arreglo"};
 
 int yywrap(){
 	return 1;
 }
 int main(){
   fichero = fopen("salida.txt", "w");
-  int token, i= 0, n=0, linea=0, sw=0;
-  
+  int token, i= 0, n=0, linea=0, sw=0;  
   token = yylex();
-  char *ids[10000];    
+  char *ids[10000];
+  char *errores[10000];    
   while(token){ 
     if(token == 47){
-      printf("\t error linea %d simbolo -------> %s \n",yylinea,yytext);
-      err++;
+      printf("\t [linea %d] Error: simbolo -------> %s \n",yylinea,yytext);
+      errores[err]=yytext;     
     }else{
       if(linea != yylinea){//guarda salto de linea cuando detecta otra linea
         fputs("\n", fichero);
@@ -169,10 +173,12 @@ int buscar(char *const yytext,char *const ids[],int i){
 }
 
 //considerar comentarios mas o menos está
-//arreglos de cualquier dim,  cadenas en asignacion
+//arreglos de cualquier dim (ya defini los arreglos),  cadenas en asignacion
 //LISTADO DE ERRORES
 //salida.
-
+//mejorar expresion regular de los arreglos
+//VARIABLES QUE COMIENZAN POR NUMERO
+//SIMBOLOS RAROS ENTRE VARIABLES
 
 
 

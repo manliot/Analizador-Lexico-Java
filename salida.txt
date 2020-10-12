@@ -1,9 +1,9 @@
-PUBLIC CLASS Id= AnyThing Llave-a= { Op-mod= % 
+PUBLIC CLASS Id= AnyThing Llave-a= { 
 PUBLIC STATIC VOID Id= main Parent-a= ( STRING Corchete-a= [ Corchete-c= ] Id= args Parent-c= ) Llave-a= { 
 INT Id= i Op-asing= = Cte-entera= 1 Punto-coma= ; 
 INT Id= j Op-asing= = Cte-entera= 20 Punto-coma= ; 
 CHAR Id= c Punto-coma= ; 
-STRING Id= cadena Punto-coma= ; 
+STRING Punto-coma= ; 
 DOUBLE Id= z Punto-coma= ; 
 Id= z Op-asing= = Cte-real= 14.9e-8 Punto-coma= ; 
 Id= z Op-asing= = Cte-real= 12.9 Punto-coma= ; 
@@ -21,4 +21,4 @@ Llave-c= }
  
 TABLA DE IDENTIFICADORES 
 Hay 9 identificadores 
-id= AnyThing; id= main; id= args; id= i; id= j; id= c; id= cadena; id= z; id= k; 
+id= AnyThing; id= main; id= args; id= i; id= j; id= c; id= z; id= cadena; id= k; 
