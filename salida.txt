@@ -1,4 +1,4 @@
-PUBLIC CLASS Id= AnyThing Llave-a= { 
+PUBLIC CLASS Id= AnyThing Llave-a= { Op-mod= % 
 PUBLIC STATIC VOID Id= main Parent-a= ( STRING Corchete-a= [ Corchete-c= ] Id= args Parent-c= ) Llave-a= { 
 INT Id= i Op-asing= = Cte-entera= 1 Punto-coma= ; 
 INT Id= j Op-asing= = Cte-entera= 20 Punto-coma= ; 

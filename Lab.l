@@ -3,11 +3,11 @@
    #include <stdio.h>
    #include <stdlib.h>
    #include <string.h>
-   #include <stdbool.h>
+  
    int yylinea;
    int err=0;
    FILE* fichero; 
-   int buscar(char *const yytext,char *const ids[],int i);   
+   int buscar(char *const yytext,char *const ids[],int i);
    #define IF          1;
    #define ELSE        2; 
    #define FOR         3;
@@ -54,6 +54,7 @@
    #define OP_NO      44;
    #define CHAR       45;
    #define COMENTARIO 46;
+   #define ERROR      47;    
 %}
 digito [0-9]
 letra [a-zA-Z]
@@ -83,13 +84,13 @@ letra [a-zA-Z]
 "-="      return MENOSIGUA;
 "*="      return PORIGUA;
 "/="      return DIVIGUA;
-"{"		 return LLAVE_A;
-"}"		 return LLAVE_C;
-";"		 return PUNTOYCOM;
-"("		 return PARENT_A;
-")"		 return PARENT_C;
-"["		 return CORCHET_A;
-"]"		 return CORCHET_C;
+"{"		    return LLAVE_A;
+"}"		    return LLAVE_C;
+";"		    return PUNTOYCOM;
+"("		    return PARENT_A;
+")"		    return PARENT_C;
+"["		    return CORCHET_A;
+"]"		    return CORCHET_C;
 "-"?({digito})+                                         return CTE_ENT;
 "-"?({digito})+"."({digito})+(e([-|+])[1-9]+)?          return CTE_REAL;
 ("\"")([^\n\"]*([.])*)*("\"")                           return CTE_CAD;
@@ -110,9 +111,9 @@ letra [a-zA-Z]
 \t			;
 \r			;
 [ ]			;
-.			{err++;printf("\tERROR LEXICO--> $s");}
+.			{err++;return ERROR}
 %%
-char *const nombres[]={NULL,"IF","ELSE","FOR","WHILE","DOUBLE","INT","STRING","NEW","PUBLIC","CLASS","STATIC","VOID",
+char *const nombres[]={"ERROR","IF","ELSE","FOR","WHILE","DOUBLE","INT","STRING","NEW","PUBLIC","CLASS","STATIC","VOID",
 "Op-mult","Op-sum","Op-sust","Op-div","Op-asing","Op-mod","Op-masMas","Op-menosMenos","Op-sumAsig","Op-menAsig",
 "Op-mulAsig","Op-divAsig","Llave-a","Llave-c", "Punto-coma","Parent-a","Parent-c","Corchete-a","Corchete-c","Cte-entera",
 "Cte-real","Cte-cadena","Id","Igual","Op-Men-igual","Op-May-igual","Op-Diferente","Op-Mayor","Op-Menor","Op-y","Op-o",
@@ -127,38 +128,36 @@ int main(){
   
   token = yylex();
   char *ids[10000];    
-  while(token){    
-    if(linea != yylinea){//guarda salto de linea cuando detecta otra linea
-      fputs("\n", fichero);
-    }
-    if((token>=1 & token<=12) || token==45){//palabras clave
-      fprintf(fichero,"%s ",nombres[token]);
+  while(token){ 
+    if(token == 47){
+      printf("\t error linea %d simbolo -------> %s \n",yylinea,yytext);
+      err++;
     }else{
-      fprintf(fichero,"%s= %s ",nombres[token],yytext);          
-      if( token == 35){
-        if(buscar(yytext,ids,i)==0){         
-          ids[i]=strdup(yytext);
-          i++;          
-        }      	                  
+      if(linea != yylinea){//guarda salto de linea cuando detecta otra linea
+        fputs("\n", fichero);
+      }
+      if((token>=1 & token<=12) || token==45){//palabras clave
+        fprintf(fichero,"%s ",nombres[token]);
+      }else{
+        fprintf(fichero,"%s= %s ",nombres[token],yytext);          
+        if( token == 35){
+          if(buscar(yytext,ids,i)==0){         
+            ids[i]=strdup(yytext);
+            i++;          
+          }      	                  
+        }
       }
     }
     linea=yylinea;     
-    token = yylex();
-
-    if (token > 45 || token == 0){
-       err++;
-       printf(" \tERROR LEXICO--> %d \n", yylinea);
-    }
+    token = yylex();    
   }
   fprintf(fichero,"\n \n \n \nTABLA DE IDENTIFICADORES \nHay %d identificadores \n",i);
   for (int j=0; j<i;j++){
     fprintf(fichero,"id= %s; ",ids[j]);        
   }
-
-   printf("ERROR TOKENS: %d ...\n", err);
-   return 0;
-   
-   fclose(fichero);
+  printf("ERROR TOKENS: %d\n", err);
+  return 0;   
+  fclose(fichero);
 }
 int buscar(char *const yytext,char *const ids[],int i){  
   for (int k=0; k<i; k++){    
@@ -169,8 +168,13 @@ int buscar(char *const yytext,char *const ids[],int i){
   return 0;
 }
 
-//considerar comentarios
+//considerar comentarios mas o menos está
 //arreglos de cualquier dim,  cadenas en asignacion
 //LISTADO DE ERRORES
-// Cualquier símbolo diferente de los establecidos es un error y se debe colocar también en el archivo de
 //salida.
+
+
+
+
+
+

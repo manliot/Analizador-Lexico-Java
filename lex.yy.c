@@ -523,11 +523,11 @@ char *yytext;
    #include <stdio.h>
    #include <stdlib.h>
    #include <string.h>
-   #include <stdbool.h>
+  
    int yylinea;
    int err=0;
    FILE* fichero; 
-   int buscar(char *const yytext,char *const ids[],int i);   
+   int buscar(char *const yytext,char *const ids[],int i);
    #define IF          1;
    #define ELSE        2; 
    #define FOR         3;
@@ -574,8 +574,9 @@ char *yytext;
    #define OP_NO      44;
    #define CHAR       45;
    #define COMENTARIO 46;
-#line 578 "lex.yy.c"
+   #define ERROR      47;    
 #line 579 "lex.yy.c"
+#line 580 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -792,9 +793,9 @@ YY_DECL
 		}
 
 	{
-#line 60 "Lab.l"
+#line 61 "Lab.l"
 
-#line 798 "lex.yy.c"
+#line 799 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -853,276 +854,276 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 61 "Lab.l"
+#line 62 "Lab.l"
 return IF;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 62 "Lab.l"
+#line 63 "Lab.l"
 return ELSE;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 63 "Lab.l"
+#line 64 "Lab.l"
 return FOR;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 64 "Lab.l"
+#line 65 "Lab.l"
 return WHILE;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 65 "Lab.l"
+#line 66 "Lab.l"
 return DOUBLE;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 66 "Lab.l"
+#line 67 "Lab.l"
 return INT;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 67 "Lab.l"
+#line 68 "Lab.l"
 return STRING;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 68 "Lab.l"
+#line 69 "Lab.l"
 return NEW;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 69 "Lab.l"
+#line 70 "Lab.l"
 return PUBLIC;            
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 70 "Lab.l"
+#line 71 "Lab.l"
 return CLASS;          
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 71 "Lab.l"
+#line 72 "Lab.l"
 return STATIC;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 72 "Lab.l"
+#line 73 "Lab.l"
 return VOID;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 73 "Lab.l"
+#line 74 "Lab.l"
 return CHAR;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 74 "Lab.l"
+#line 75 "Lab.l"
 return OP_MULT;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 75 "Lab.l"
+#line 76 "Lab.l"
 return OP_SUM;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 76 "Lab.l"
+#line 77 "Lab.l"
 return OP_SUST;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 77 "Lab.l"
+#line 78 "Lab.l"
 return OP_DIV;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 78 "Lab.l"
+#line 79 "Lab.l"
 return OP_ASIG;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 79 "Lab.l"
+#line 80 "Lab.l"
 return OP_MOD;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 80 "Lab.l"
+#line 81 "Lab.l"
 return PLUSPLUS;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 81 "Lab.l"
+#line 82 "Lab.l"
 return MENMEN;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 82 "Lab.l"
+#line 83 "Lab.l"
 return MASIGUA;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 83 "Lab.l"
+#line 84 "Lab.l"
 return MENOSIGUA;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 84 "Lab.l"
+#line 85 "Lab.l"
 return PORIGUA;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 85 "Lab.l"
+#line 86 "Lab.l"
 return DIVIGUA;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 86 "Lab.l"
+#line 87 "Lab.l"
 return LLAVE_A;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 87 "Lab.l"
+#line 88 "Lab.l"
 return LLAVE_C;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 88 "Lab.l"
+#line 89 "Lab.l"
 return PUNTOYCOM;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 89 "Lab.l"
+#line 90 "Lab.l"
 return PARENT_A;
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 90 "Lab.l"
+#line 91 "Lab.l"
 return PARENT_C;
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 91 "Lab.l"
+#line 92 "Lab.l"
 return CORCHET_A;
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 92 "Lab.l"
+#line 93 "Lab.l"
 return CORCHET_C;
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 93 "Lab.l"
+#line 94 "Lab.l"
 return CTE_ENT;
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 94 "Lab.l"
+#line 95 "Lab.l"
 return CTE_REAL;
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 95 "Lab.l"
+#line 96 "Lab.l"
 return CTE_CAD;
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 96 "Lab.l"
+#line 97 "Lab.l"
 return ID;
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 97 "Lab.l"
+#line 98 "Lab.l"
 return COMENTARIO;
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 98 "Lab.l"
+#line 99 "Lab.l"
 return COMENTARIO;
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 99 "Lab.l"
+#line 100 "Lab.l"
 return OP_IGUAL;
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 100 "Lab.l"
+#line 101 "Lab.l"
 return OP_MENIGUA;
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 101 "Lab.l"
+#line 102 "Lab.l"
 return OP_MAYIGUA;
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 102 "Lab.l"
+#line 103 "Lab.l"
 return DIFERENTE;
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 103 "Lab.l"
+#line 104 "Lab.l"
 return MAYOR;
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 104 "Lab.l"
+#line 105 "Lab.l"
 return MENOR;
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 105 "Lab.l"
+#line 106 "Lab.l"
 return DIFERENTE;
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 106 "Lab.l"
+#line 107 "Lab.l"
 return OP_Y;
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 107 "Lab.l"
+#line 108 "Lab.l"
 return OP_O;
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 108 "Lab.l"
+#line 109 "Lab.l"
 return OP_NO;
 	YY_BREAK
 case 49:
 /* rule 49 can match eol */
 YY_RULE_SETUP
-#line 109 "Lab.l"
+#line 110 "Lab.l"
 yylinea++;
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 110 "Lab.l"
+#line 111 "Lab.l"
 ;
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 111 "Lab.l"
+#line 112 "Lab.l"
 ;
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 112 "Lab.l"
+#line 113 "Lab.l"
 ;
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 113 "Lab.l"
-{err++;printf("\tERROR LEXICO--> $s");}
+#line 114 "Lab.l"
+{err++;return ERROR}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 114 "Lab.l"
+#line 115 "Lab.l"
 ECHO;
 	YY_BREAK
-#line 1126 "lex.yy.c"
+#line 1127 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2127,9 +2128,9 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 114 "Lab.l"
+#line 115 "Lab.l"
 
-char *const nombres[]={NULL,"IF","ELSE","FOR","WHILE","DOUBLE","INT","STRING","NEW","PUBLIC","CLASS","STATIC","VOID",
+char *const nombres[]={"ERROR","IF","ELSE","FOR","WHILE","DOUBLE","INT","STRING","NEW","PUBLIC","CLASS","STATIC","VOID",
 "Op-mult","Op-sum","Op-sust","Op-div","Op-asing","Op-mod","Op-masMas","Op-menosMenos","Op-sumAsig","Op-menAsig",
 "Op-mulAsig","Op-divAsig","Llave-a","Llave-c", "Punto-coma","Parent-a","Parent-c","Corchete-a","Corchete-c","Cte-entera",
 "Cte-real","Cte-cadena","Id","Igual","Op-Men-igual","Op-May-igual","Op-Diferente","Op-Mayor","Op-Menor","Op-y","Op-o",
@@ -2144,39 +2145,36 @@ int main(){
   
   token = yylex();
   char *ids[10000];    
-  while(token){
-    //printf("Line: %d\tToken Type: %s \tLexema: %s \n" , yylinea, nombres[token], yytext);
-    if(linea != yylinea){//guarda salto de linea cuando detecta otra linea
-      fputs("\n", fichero);
-    }
-    if((token>=1 & token<=12) || token==45){//palabras clave
-      fprintf(fichero,"%s ",nombres[token]);
+  while(token){ 
+    if(token == 47){
+      printf("\t error linea %d simbolo -------> %s \n",yylinea,yytext);
+      err++;
     }else{
-      fprintf(fichero,"%s= %s ",nombres[token],yytext);          
-      if( token == 35){
-        if(buscar(yytext,ids,i)==0){         
-          ids[i]=strdup(yytext);
-          i++;          
-        }      	                  
+      if(linea != yylinea){//guarda salto de linea cuando detecta otra linea
+        fputs("\n", fichero);
+      }
+      if((token>=1 & token<=12) || token==45){//palabras clave
+        fprintf(fichero,"%s ",nombres[token]);
+      }else{
+        fprintf(fichero,"%s= %s ",nombres[token],yytext);          
+        if( token == 35){
+          if(buscar(yytext,ids,i)==0){         
+            ids[i]=strdup(yytext);
+            i++;          
+          }      	                  
+        }
       }
     }
     linea=yylinea;     
-    token = yylex();
-
-    if (token > 45 || token == 0){
-       err++;
-       printf(" \tERROR LEXICO--> %d \n", yylinea);
-    }
+    token = yylex();    
   }
   fprintf(fichero,"\n \n \n \nTABLA DE IDENTIFICADORES \nHay %d identificadores \n",i);
   for (int j=0; j<i;j++){
     fprintf(fichero,"id= %s; ",ids[j]);        
   }
-
-   printf("ERROR TOKENS: %d ...\n", err);
-   return 0;
-   
-   fclose(fichero);
+  printf("ERROR TOKENS: %d\n", err);
+  return 0;   
+  fclose(fichero);
 }
 int buscar(char *const yytext,char *const ids[],int i){  
   for (int k=0; k<i; k++){    
@@ -2187,10 +2185,14 @@ int buscar(char *const yytext,char *const ids[],int i){
   return 0;
 }
 
-// Eliminar los id repeti2
-//considerar comentarios
+//considerar comentarios mas o menos está
 //arreglos de cualquier dim,  cadenas en asignacion
 //LISTADO DE ERRORES
-// Cualquier símbolo diferente de los establecidos es un error y se debe colocar también en el archivo de
 //salida.
+
+
+
+
+
+
 
