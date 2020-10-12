@@ -94,7 +94,7 @@ letra [a-zA-Z]
 "-"?({digito})+                                         return CTE_ENT;
 "-"?({digito})+"."({digito})+(e([-|+])[1-9]+)?          return CTE_REAL;
 ("\"")([^\n\"]*([.])*)*("\"")                           return CTE_CAD;
-({letra}|"_")({letra}|{digito}|"_")*                    return ID;
+({letra})({letra}|{digito})*                    return ID;
 "//"([^\n\"]*([.])*)*                                   return COMENTARIO;
 "\/*"([.])*"\*/"                                        return COMENTARIO;
 "=="		 return OP_IGUAL;
