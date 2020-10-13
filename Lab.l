@@ -1,4 +1,3 @@
-
 %{
    #include <stdio.h>
    #include <stdlib.h>
@@ -58,8 +57,16 @@
 %}
 digito [0-9]
 letra [a-zA-Z]
-variable ({letra})({letra}|{digito})*  
+variable ({letra})({letra}|{digito})* 
+entero "-"?({digito})+ 
+symbolList ("("|")"|"{"|"}"|";"|"["|"]")
+palclave ("if"|"else"|"for"|"while"|"new"|"public"|"class"|"static"|"void"|"char")
+operador ("*"|"/"|"-"|"+"|"="|"%"|"++"|"--"|"+="|"-="|"*="|"/="|"=="|"<="|">="|"<>"|">"|"<"|"!="|"&&"|"||"|"!")
+types ("int"|"String"|"double")
+noSymbol [^*/\-+=%{}\[\];()><!|& ]
 %%
+"//".*                                                                   return COMENTARIO;
+"/*".*[\n]*.*"*/"                                                             return COMENTARIO;
 "if"      return IF;
 "else"    return ELSE;
 "for"     return FOR;
@@ -92,13 +99,11 @@ variable ({letra})({letra}|{digito})*
 ")"		    return PARENT_C;
 "["		    return CORCHET_A;
 "]"		    return CORCHET_C;
-"-"?({digito})+                                                          return CTE_ENT;
+{entero}                                                                 return CTE_ENT;
 "-"?({digito})+"."({digito})+(e([-|+])[1-9]+)?                           return CTE_REAL;
 ("\"")([^\n\"]*([.])*)*("\"")                                            return CTE_CAD;
 {variable}                                                               return ID;
-"//".*                                                    return COMENTARIO;
-"\/*"([^\n\"]*([.])*)*"\*/"                                              return COMENTARIO;
-{variable}"["{digito}+"]"    return ARREGLO;
+{variable}"["{variable}|{digito}+"]"("["{variable}|{digito}+"]")?        return ARREGLO;
 "=="		 return OP_IGUAL;
 "<="		 return OP_MENIGUA;
 ">="		 return OP_MAYIGUA;
@@ -113,9 +118,8 @@ variable ({letra})({letra}|{digito})*
 \t			;
 \r			;
 [ ]			;
-({digito})({letra}|{digito})*   return ERROR;
-({letra})({letra}|{digito}|"&")*   return ERROR;
- . {err++;return ERROR}
+({noSymbol}|^)+{variable}                             {err++;return ERROR};
+.[.]* {err++;return ERROR}
 %%
 char *const nombres[]={"ERROR","IF","ELSE","FOR","WHILE","DOUBLE","INT","STRING","NEW","PUBLIC","CLASS","STATIC","VOID",
 "Op-mult","Op-sum","Op-sust","Op-div","Op-asing","Op-mod","Op-masMas","Op-menosMenos","Op-sumAsig","Op-menAsig",
@@ -128,13 +132,13 @@ int yywrap(){
 }
 int main(){
   fichero = fopen("salida.txt", "w");
-  int token, i= 0, n=0, linea=0, sw=0;  
+  int token, i= 0, linea=0;
   token = yylex();
   char *ids[10000];
   char *errores[10000];    
   while(token){ 
     if(token == 47){
-      printf("\t [linea %d] Error: simbolo -------> %s \n",yylinea,yytext);
+      printf("\t [linea %d] Error: simbolo -------> ►%s◄ \n",yylinea+1,yytext);
       errores[err]=yytext;     
     }else{
       if(linea != yylinea){//guarda salto de linea cuando detecta otra linea
@@ -144,7 +148,7 @@ int main(){
         fprintf(fichero,"%s ",nombres[token]);
       }else{
         fprintf(fichero,"%s= %s ",nombres[token],yytext);          
-        if( token == 35){
+        if( token == 35){//ID
           if(buscar(yytext,ids,i)==0){         
             ids[i]=strdup(yytext);
             i++;          
@@ -179,6 +183,11 @@ int buscar(char *const yytext,char *const ids[],int i){
 //mejorar expresion regular de los arreglos
 //VARIABLES QUE COMIENZAN POR NUMERO
 //SIMBOLOS RAROS ENTRE VARIABLES
+//simbolos raros seguidos
+//simbolos entre numeros
+
+
+//comentarios multilinea juntos
 
 
 
