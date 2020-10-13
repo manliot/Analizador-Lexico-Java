@@ -63,10 +63,10 @@ symbolList ("("|")"|"{"|"}"|";"|"["|"]")
 palclave ("if"|"else"|"for"|"while"|"new"|"public"|"class"|"static"|"void"|"char")
 operador ("*"|"/"|"-"|"+"|"="|"%"|"++"|"--"|"+="|"-="|"*="|"/="|"=="|"<="|">="|"<>"|">"|"<"|"!="|"&&"|"||"|"!")
 types ("int"|"String"|"double")
-noSymbol [^*/\-+=%{}\[\];()><!|& ]
+noSymbol [^*/\-+=%{}\[\];()><!|& \n\t]
 %%
 "//".*                                                                   return COMENTARIO;
-"/*".*[\n]*.*"*/"                                                             return COMENTARIO;
+"/*".*[\n]*.*"*/"                                                        return COMENTARIO;
 "if"      return IF;
 "else"    return ELSE;
 "for"     return FOR;
@@ -119,6 +119,7 @@ noSymbol [^*/\-+=%{}\[\];()><!|& ]
 \r			;
 [ ]			;
 ({noSymbol}|^)+{variable}                             {err++;return ERROR};
+{variable}({noSymbol}|^)+({letra}|{digito})*          {err++;return ERROR};
 .[.]* {err++;return ERROR}
 %%
 char *const nombres[]={"ERROR","IF","ELSE","FOR","WHILE","DOUBLE","INT","STRING","NEW","PUBLIC","CLASS","STATIC","VOID",
@@ -187,10 +188,7 @@ int buscar(char *const yytext,char *const ids[],int i){
 //simbolos raros seguidos
 //simbolos entre numeros
 
-
 //comentarios multilinea juntos
-
-
 
 
 

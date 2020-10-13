@@ -7,7 +7,7 @@ public static void main (String[] args){
  double z;
  z=14.9e-8;
  z=12.9;
- cadena="Hola"; 
+ cadena#="Hola"; 
  c="a";
  i=i*2;
  for (int k = 1; k < j; k++){

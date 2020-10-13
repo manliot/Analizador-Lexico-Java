@@ -1,12 +1,12 @@
-PUBLIC CLASS Id= AnyThing Llave-a= { STATIC VOID Id= main Parent-a= ( STRING Corchete-a= [ Corchete-c= ] Id= args Parent-c= ) Llave-a= { 
+PUBLIC CLASS Id= AnyThing Llave-a= { 
+PUBLIC STATIC VOID Id= main Parent-a= ( STRING Corchete-a= [ Corchete-c= ] Id= args Parent-c= ) Llave-a= { 
 INT Id= i Op-asing= = Cte-entera= 1 Punto-coma= ; 
 INT Id= j Op-asing= = Cte-entera= 20 Punto-coma= ; 
 CHAR Id= c Punto-coma= ; 
 STRING Punto-coma= ; 
 DOUBLE Id= z Punto-coma= ; 
 Id= z Op-asing= = Cte-real= 14.9e-8 Punto-coma= ; 
-Id= z Op-asing= = Cte-real= 12.9 Punto-coma= ; 
-Id= cadena Op-asing= = Cte-cadena= "Hola" Punto-coma= ; 
+Id= z Op-asing= = Cte-real= 12.9 Punto-coma= ; Op-asing= = Cte-cadena= "Hola" Punto-coma= ; 
 Id= c Op-asing= = Cte-cadena= "a" Punto-coma= ; 
 Id= i Op-asing= = Id= i Op-mult= * Cte-entera= 2 Punto-coma= ; 
 FOR Parent-a= ( INT Id= k Op-asing= = Cte-entera= 1 Punto-coma= ; Id= k Op-Menor= < Id= j Punto-coma= ; Id= k Op-masMas= ++ Parent-c= ) Llave-a= { 
@@ -19,13 +19,12 @@ Llave-c= } Comentario= //hola
  
  
 TABLA DE IDENTIFICADORES 
-Hay 9 identificadores 
-id= AnyThing; id= main; id= args; id= i; id= j; id= c; id= z; id= cadena; id= k; 
+Hay 8 identificadores 
+id= AnyThing; id= main; id= args; id= i; id= j; id= c; id= z; id= k; 
  
  
  
 Listado de errores 
 Hay 2 identificadores 
-	 [linea 1] Error: No se pudo reconocer ►
-public◄ como un componente lexico valido
-	 [linea 5] Error: No se pudo reconocer ►#cadena◄ como un componente lexico valido
+	 [linea 6] Error: No se pudo reconocer ►#cadena◄ como un componente lexico valido.
+	 [linea 10] Error: No se pudo reconocer ►cadena#◄ como un componente lexico valido.
