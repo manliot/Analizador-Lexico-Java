@@ -21,3 +21,11 @@ Llave-c= } Comentario= //hola
 TABLA DE IDENTIFICADORES 
 Hay 9 identificadores 
 id= AnyThing; id= main; id= args; id= i; id= j; id= c; id= z; id= cadena; id= k; 
+ 
+ 
+ 
+Listado de errores 
+Hay 2 identificadores 
+	 [linea 1] Error: No se pudo reconocer ►
+public◄ como un componente lexico valido
+	 [linea 5] Error: No se pudo reconocer ►#cadena◄ como un componente lexico valido

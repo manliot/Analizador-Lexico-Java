@@ -135,11 +135,12 @@ int main(){
   int token, i= 0, linea=0;
   token = yylex();
   char *ids[10000];
-  char *errores[10000];    
+  char *errores[10000];
+  int linErr[10000];    
   while(token){ 
     if(token == 47){
-      printf("\t [linea %d] Error: simbolo -------> ►%s◄ \n",yylinea+1,yytext);
-      errores[err]=yytext;     
+      errores[err]=strdup(yytext);
+      linErr[err]=yylinea+1;
     }else{
       if(linea != yylinea){//guarda salto de linea cuando detecta otra linea
         fputs("\n", fichero);
@@ -163,7 +164,11 @@ int main(){
   for (int j=0; j<i;j++){
     fprintf(fichero,"id= %s; ",ids[j]);        
   }
-  printf("ERROR TOKENS: %d\n", err);
+
+  fprintf(fichero,"\n \n \n \nListado de errores \nHay %d identificadores \n",err);
+   for (int j=1; j<=err;j++){
+    fprintf(fichero,"\t [linea %d] Error: No se pudo reconocer ►%s◄ como un componente lexico valido.\n",linErr[j],errores[j]);       
+  }
   return 0;   
   fclose(fichero);
 }
@@ -176,12 +181,8 @@ int buscar(char *const yytext,char *const ids[],int i){
   return 0;
 }
 
-//considerar comentarios mas o menos está
 //arreglos de cualquier dim (ya defini los arreglos),  cadenas en asignacion
-//LISTADO DE ERRORES
-//salida.
 //mejorar expresion regular de los arreglos
-//VARIABLES QUE COMIENZAN POR NUMERO
 //SIMBOLOS RAROS ENTRE VARIABLES
 //simbolos raros seguidos
 //simbolos entre numeros
