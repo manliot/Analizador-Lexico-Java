@@ -1,12 +1,17 @@
 PUBLIC CLASS Id= AnyThing Llave-a= { 
 PUBLIC STATIC VOID Id= main Parent-a= ( STRING Corchete-a= [ Corchete-c= ] Id= args Parent-c= ) Llave-a= { 
+INT Id= matriz Corchete-a= [ Corchete-c= ] Corchete-a= [ Corchete-c= ] Op-asing= = NEW INT Corchete-a= [ Cte-entera= 3 Corchete-c= ] Corchete-a= [ Cte-entera= 3 Corchete-c= ] Punto-coma= ; 
+INT Corchete-a= [ Corchete-c= ] Corchete-a= [ Corchete-c= ] Id= matriz Op-asing= = Cte-entera= 564 Punto-coma= ; 
+INT Id= matriz Corchete-a= [ Id= i Corchete-c= ] Corchete-a= [ Id= j Corchete-c= ] Op-asing= = NEW INT Corchete-a= [ Cte-entera= 3 Corchete-c= ] Corchete-a= [ Cte-entera= 3 Corchete-c= ] Punto-coma= ; 
 INT Id= i Op-asing= = Cte-entera= 1 Punto-coma= ; 
 INT Id= j Op-asing= = Cte-entera= 20 Punto-coma= ; 
-CHAR Id= c Punto-coma= ; 
-STRING Punto-coma= ; 
+INT Id= V Corchete-a= [ Cte-entera= 3 Corchete-c= ] Punto-coma= ; 
+CHAR Cte-entera= 8 Punto-coma= ; 
+STRING Id= cadena Punto-coma= ; 
 DOUBLE Id= z Punto-coma= ; 
 Id= z Op-asing= = Cte-real= 14.9e-8 Punto-coma= ; 
-Id= z Op-asing= = Cte-real= 12.9 Punto-coma= ; Op-asing= = Cte-cadena= "Hola" Punto-coma= ; 
+Id= z Op-asing= = Cte-real= 12.9 Punto-coma= ; 
+Id= cadena Op-asing= = Cte-cadena= "Hola" 
 Id= c Op-asing= = Cte-cadena= "a" Punto-coma= ; 
 Id= i Op-asing= = Id= i Op-mult= * Cte-entera= 2 Punto-coma= ; 
 FOR Parent-a= ( INT Id= k Op-asing= = Cte-entera= 1 Punto-coma= ; Id= k Op-Menor= < Id= j Punto-coma= ; Id= k Op-masMas= ++ Parent-c= ) Llave-a= { 
@@ -14,17 +19,15 @@ Id= i Op-mulAsig= *= Id= k Punto-coma= ;
 Id= z Op-divAsig= /= Cte-real= 2.0 Punto-coma= ; 
 Llave-c= } 
 Llave-c= } 
-Llave-c= } Comentario= //hola 
+Llave-c= } 
  
  
  
 TABLA DE IDENTIFICADORES 
-Hay 8 identificadores 
-id= AnyThing; id= main; id= args; id= i; id= j; id= c; id= z; id= k; 
+Hay 11 identificadores 
+id= AnyThing; id= main; id= args; id= matriz; id= i; id= j; id= V; id= cadena; id= z; id= c; id= k; 
  
  
  
 Listado de errores 
-Hay 2 identificadores 
-	 [linea 6] Error: No se pudo reconocer ►#cadena◄ como un componente lexico valido.
-	 [linea 10] Error: No se pudo reconocer ►cadena#◄ como un componente lexico valido.
+Hay 0 identificadores 
